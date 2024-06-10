@@ -22,6 +22,10 @@ namespace Models
             AgeRestriction = ageRestriction;
             Quantity = quantity;
         }
+        public bool IsAvailable()
+        {
+            return Quantity > 0;
+        }
         public void Rent(User user)
         {
 
