@@ -1,0 +1,45 @@
+﻿@model UserViewModel
+@Html.ActionLink("PrivacyLink", "Privacy", null, null, new { @class = "btn btn-primary" })
+
+@Html.TextBox("Input1", "Enter name", null, new { @class = "form-control" })
+
+@Html.TextArea("TextArea1", "Enter your description", new {@class = "mt-2"})
+
+@Html.DropDownList("DropDownList1", new List<SelectListItem>
+    {
+    new SelectListItem("Water", "1" ),
+    new SelectListItem("Soft Drink", "2" ),
+    new SelectListItem("Alcoholic beverage", "3" )
+    },"Choose an item", new {@class = "form-control mt-2"})
+    <div style="margin-bottom = "10px">
+        @Html.RadioButton("RadioBtns", "red", new { @class="form-check-input" })
+        @Html.Label("Label1", "red", new { @class ="form-check-label" })
+        <br />
+        @Html.RadioButton("RadioBtns", "green", new { @class="form-check-input" })
+        @Html.Label("Label1", "green", new { @class ="form-check-label" })
+        <br />
+        @Html.RadioButton("RadioBtns", "blue", new { @class="form-check-input" })
+        @Html.Label("Label1", "blue", new { @class ="form-check-label" })
+    </div>
+@{
+    var items = new List<SelectListItem>
+    {
+    new SelectListItem("Water", "1" ),
+    new SelectListItem("Soft Drink", "2" ),
+    new SelectListItem("Alcoholic beverage", "3" )
+};
+    }
+<hr></hr>
+    <div class="row">
+        <div class="col-md-5">
+            <a asp-action="Privacy" asp-asp-controller="Home" asp-route-itemid="1" class="btn btn-outline-warning">Privacy btn 2</a>
+
+        <input asp-for="UserName" class="form-control" type="text" placeholder="Enter your username"></input>
+        <input asp-for="Password" class="form-control" type="text" placeholder="Enter your password"></input>
+        <select class="mt-2" asp-for="DrinkPreference" asp-items="items"><option>Choose a drink</option></select>
+        </div>
+    </div>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
