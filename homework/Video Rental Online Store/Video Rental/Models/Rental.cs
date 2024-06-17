@@ -6,7 +6,7 @@
         public int MovieId { get; set; }
         public DateTime? RentedOn { get; set; }
 
-        public Rental(int userId, int movieId)
+        public Rental(int userId, int movieId, int id) : base(id)
         {
             UserId = userId;
             MovieId = movieId;

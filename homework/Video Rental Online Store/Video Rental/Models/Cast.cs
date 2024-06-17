@@ -8,7 +8,7 @@ namespace Models
         public string Name { get; set; }
         public Part Part { get; set; }
 
-        public Cast(int movieId, string name, Part part)
+        public Cast(int movieId, string name, Part part, int id) : base(id)
         {
             MovieId = movieId;
             Name = name;

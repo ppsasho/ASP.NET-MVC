@@ -12,7 +12,7 @@ namespace Models
         public AgeRestriction AgeRestriction { get; set; }
         public int Quantity { get; set; }
 
-        public Movie(string title, Genre genre, DateTime releaseDate, AgeRestriction ageRestriction, int quantity, Language language, TimeSpan length)
+        public Movie(string title, Genre genre, DateTime releaseDate, AgeRestriction ageRestriction, int quantity, Language language, TimeSpan length, int id) : base(id)
         {
             Title = title;
             Genre = genre;

@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using Models.Enums;
+
+namespace Models
 {
     public class User : Base
     {
@@ -10,8 +12,8 @@
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime CreatedOn { get; set; }
-
-        public User(string firstName, string lastName, string username, string password, string email, int age)
+        public SubscriptionType? SubscriptionType { get; set; }
+        public User(string firstName, string lastName, string username, string password, string email, int age, int id) : base(id)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -20,6 +22,14 @@
             CreatedOn = DateTime.UtcNow;
             Email = email;
             Age = age;
+        }
+        public void SetSubscriptionType(SubscriptionType subType)
+        {
+            SubscriptionType = subType;
+        }
+        public void RemoveSubscription()
+        {
+            SubscriptionType = null;
         }
 
     }
