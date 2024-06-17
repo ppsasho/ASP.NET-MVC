@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Hosting.Internal;
+
 namespace Video_Rental
 {
     public class Program

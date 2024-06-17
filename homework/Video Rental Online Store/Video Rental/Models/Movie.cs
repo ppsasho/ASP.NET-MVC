@@ -6,21 +6,21 @@ namespace Models
     {
         public string Title { get; set; }
         public Genre Genre { get; set; }
-        public string Language { get; set; }
+        public Language Language { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public string Length { get; set; }
+        public TimeSpan Length { get; set; }
         public AgeRestriction AgeRestriction { get; set; }
         public int Quantity { get; set; }
 
-        public Movie(string title, Genre genre, string language, DateTime releaseDate, string length, AgeRestriction ageRestriction, int quantity)
+        public Movie(string title, Genre genre, DateTime releaseDate, AgeRestriction ageRestriction, int quantity, Language language, TimeSpan length)
         {
             Title = title;
             Genre = genre;
-            Language = language;
             ReleaseDate = releaseDate;
-            Length = length;
             AgeRestriction = ageRestriction;
             Quantity = quantity;
+            Language = language;
+            Length = length;
         }
         public bool IsAvailable()
         {

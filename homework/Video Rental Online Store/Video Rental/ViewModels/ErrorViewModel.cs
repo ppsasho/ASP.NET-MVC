@@ -1,4 +1,4 @@
-namespace Video_Rental.Models
+namespace ViewModels
 {
     public class ErrorViewModel
     {
