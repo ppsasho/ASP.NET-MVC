@@ -1,52 +1,60 @@
 ﻿using DataAccess.Implementation;
-using DataAccess.Interface;
 using DomainModels;
 using Mappers;
 using Services.Interface;
-using System.Reflection;
 using ViewModels;
 
 namespace Services.Implementation
 {
     public class PizzaService : IPizzaService
     {
-        private readonly IRepository<Pizza> _pizzaRepository;
+        private PizzaRepository _pizzaRepository;
+
         public PizzaService()
         {
             _pizzaRepository = new PizzaRepository();
         }
+
         public List<PizzaViewModel> GetAll()
         {
             var pizzas = _pizzaRepository.GetAll();
             return pizzas.Select(x => x.ToModel()).ToList();
         }
-        public void Create (PizzaViewModel model)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
         public PizzaViewModel GetDetails(int id)
         {
             var pizza = _pizzaRepository.GetById(id);
             return pizza.ToModel();
         }
 
-        public PizzaViewModel GetById(int id)
+        public void Create(PizzaViewModel pizza)
         {
-            var pizza = _pizzaRepository.GetById(id);
-            return pizza.ToModel();
+            if (_pizzaRepository.GetAll().Any(x => x.Name.ToLower() == pizza.Name.ToLower()))
+            {
+                throw new Exception($"Pizza with the name [{pizza.Name}] already exists");
+            };
+
+            var newPizza = new Pizza()
+            {
+                Name = pizza.Name,
+                Description = pizza.Description,
+                ImageUrl = pizza.ImageUrl
+            };
+            _pizzaRepository.Add(newPizza);
         }
 
-        public List<PizzaViewModel> SearchByName(string name)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(PizzaViewModel model)
+        public List<PizzaViewModel> SearchByName(string name)
+        {
+            var pizzas = _pizzaRepository.SearchByName(name);
+            return pizzas.Select(x => x.ToModel()).ToList();
+        }
+
+        public void Update(PizzaViewModel pizza)
         {
             throw new NotImplementedException();
         }

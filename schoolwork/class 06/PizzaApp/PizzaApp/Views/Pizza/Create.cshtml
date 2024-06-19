@@ -1,0 +1,16 @@
+﻿@model PizzaViewModel
+<form asp-action="Create" method="post">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+
+    <label asp-for="Description" class="form-label"></label>
+    <input asp-for="Description" class="form-control" />
+    <span asp-validation-for="Description" class="text-danger"></span>
+    
+    <label asp-for="ImageUrl" class="form-label"></label>
+    <input asp-for="ImageUrl" class="form-control" />
+    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    <br>
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>
