@@ -1,9 +1,10 @@
 ﻿using Models.Enums;
 
-namespace Models
+namespace ViewModels
 {
-    public class Movie : Base
+    public class MovieViewModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public Genre Genre { get; set; }
         public Language Language { get; set; }
@@ -12,16 +13,6 @@ namespace Models
         public AgeRestriction AgeRestriction { get; set; }
         public int Quantity { get; set; }
 
-        public Movie(string title, Genre genre, DateTime releaseDate, AgeRestriction ageRestriction, int quantity, Language language, TimeSpan length)
-        {
-            Title = title;
-            Genre = genre;
-            ReleaseDate = releaseDate;
-            AgeRestriction = ageRestriction;
-            Quantity = quantity;
-            Language = language;
-            Length = length;
-        }
         public bool IsAvailable()
         {
             return Quantity > 0;

@@ -7,11 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Mappers\Mappers.csproj" />
     <ProjectReference Include="..\Models\DomainModels.csproj" />
+    <ProjectReference Include="..\Storage\Storage.csproj" />
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

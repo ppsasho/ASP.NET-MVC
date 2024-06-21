@@ -1,0 +1,26 @@
+﻿@model UserViewModel
+
+<form asp-action="Register" asp-controller="User" method="post">
+    <input asp-for="FirstName" class="form-control" placeholder="first name" />
+    <span asp-validation-for="FirstName" class="text-danger"></span>
+    <br />
+
+    <input asp-for="LastName" class="form-control" placeholder="last name" />
+    <span asp-validation-for="LastName" class="text-danger"></span>
+    <br />
+    
+    <label asp-for="Age" class="form-label">Age</label>
+    <input type="number" asp-for="Age" class="form-control" />
+    <span asp-validation-for="Age" class="text-danger"></span>
+    <br />
+    
+    <input type="email" asp-for="Email" class="form-control" placeholder="email" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <br />
+    
+    <input type="password" asp-for="Password" class="form-control" placeholder="password" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+    <br />
+
+    <button type="submit" class="btn btn-success">Register</button>
+</form>
