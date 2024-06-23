@@ -1,0 +1,48 @@
+﻿@model UserMovieViewModel
+
+@{
+    if (Model.User.FirstName == null)
+    {
+        <h3>You are not logged in! The renting feature is available only when you're logged in.</h3>
+    }
+    else
+    {
+        <h3>Welcome @Model.User.FullName!</h3>
+        <br></br>
+        <a asp-action="UserMovies" asp-controller="User" class="btn btn-primary">My movies</a>
+        <a asp-action="LogOut" asp-controller="User" class="btn btn-primary">Log out</a>
+    }
+}
+<br></br>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <th scope="row">@movie.Id</th>
+                <td>@movie.Title</td>
+                <td>@movie.Quantity</td>
+                <td>
+                    <a asp-action="MovieDetails" asp-controller="User" asp-route-id="@movie.Id" class="btn btn-primary">Details</a>
+                    @{
+                        if(Model.User.FirstName != null && movie.Quantity > 0)
+                        {
+                            <a asp-action="RentMovie" asp-controller="User" asp-route-id="@movie.Id" class="btn btn-primary">Rent</a>
+                        } else
+                        {
+                            <btn class="btn btn-primary disabled" disabled>Rent</btn>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

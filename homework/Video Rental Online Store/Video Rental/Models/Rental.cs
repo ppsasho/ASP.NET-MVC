@@ -17,7 +17,7 @@
         
         public void Return()
         {
-
+            ReturnedOn = DateTime.UtcNow;
         }
     }
 }

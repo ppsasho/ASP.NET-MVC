@@ -10,7 +10,7 @@ namespace ViewModels
         [Required]
         [MinLength(2)]
         [DisplayName("First Name")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
         [Required]
         [MinLength(2)]
         [DisplayName("Last Name")]

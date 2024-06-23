@@ -1,6 +1,6 @@
 ﻿@model List<UserViewModel>
 @{
-    <h2>Welcome to UserIndex!</h2>
+    <h2>We are proudly showing all our users over here as a thanks for being loyal customers!</h2>
     if(Model.Count < 1)
     {
         <h3>No users available</h3>
@@ -10,10 +10,9 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
-                    <th scope="col">Email</th>
                     <th scope="col">Subscription type</th>
                 </tr>
             </thead>
@@ -21,11 +20,16 @@
                 @foreach (var user in Model)
                 {
                     <tr>
-                        <th scope="row">@user.Id</th>
+                        <td>@user.Id</td>
                         <td>@user.FirstName</td>
                         <td>@user.LastName</td>
-                        <td>@user.Email</td>
-                        <td>@user.SubscriptionType</td>
+                        @if(user.SubscriptionType != null)
+                        {
+                            <td>@user.SubscriptionType</td>
+                        } else
+                        {
+                            <td>None</td>
+                        }
                     </tr>
                 }
             </tbody>

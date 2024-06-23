@@ -1,0 +1,30 @@
+﻿@model UserRentalViewModel
+<a asp-action="ViewMovies" asp-controller="User" class="btn btn-primary">Back</a>
+<h3>My movies</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Movie Id</th>
+            <th scope="col">Rent date</th>
+            <th scope="col">Returned on</th>
+        </tr>
+    </thead>
+    @foreach(var rental in Model.Rentals)
+    {
+        <tr>
+            <td>@rental.Id</td>
+            <td>@rental.MovieId</td>
+            <td>@rental.RentedOn</td>
+            @if(rental.ReturnedOn != null)
+            {
+                <td>@rental.ReturnedOn</td>
+            }
+            else
+            {
+                <td>Not returned yet!</td>
+                <td><a asp-action="ReturnMovie" asp-controller="User" asp-route-id="@rental.Id" class="btn btn-primary">Return</a></td>
+            }
+        </tr>
+    }
+</table>
