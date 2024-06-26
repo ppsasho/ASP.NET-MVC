@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Models;
 using Models.Enums;
 using Services;
 using Storage;
@@ -75,7 +76,7 @@ namespace Video_Rental.Controllers
         public IActionResult UserMovies()
         {
             var user = CurrentSession.CurrentUser;
-            var rentals = _movieService.GetRentals().Where(x => x.UserId == user.Id).ToList();
+            var rentals = _movieService.GetUserRentals();
             var userRentalModel = new UserRentalViewModel()
             {
                 Rentals = rentals,
@@ -93,9 +94,32 @@ namespace Video_Rental.Controllers
         }
         public IActionResult RentMovie(int id)
         {
+            var userRentals = _movieService.GetUserRentals().Where(x => x.ReturnedOn == null).ToList();
+            switch (CurrentSession.CurrentUser.SubscriptionType)
+            {
+                case SubscriptionType.None:
+                    if (userRentals.Count > 0) return RedirectToAction("Subscribe");
+                    break;
+
+                case SubscriptionType.Monthly:
+                    if (userRentals.Count > 3) return RedirectToAction("Subscribe");
+                    break;
+
+                case SubscriptionType.Yearly:
+                    if (userRentals.Count > 9) return RedirectToAction("MovieRentLimitReached");
+                    break;
+            }
             _movieService.Rent(id, CurrentSession.CurrentUser.Id);
 
             return RedirectToAction("ViewMovies");
+        }
+        public IActionResult Subscribe()
+        {
+            return View();
+        }
+        public IActionResult MovieRentLimitReached()
+        {
+            return View();
         }
         public IActionResult ReturnMovie(int id)
         {

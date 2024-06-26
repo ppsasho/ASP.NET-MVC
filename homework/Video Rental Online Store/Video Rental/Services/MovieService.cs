@@ -1,5 +1,6 @@
 ﻿using Mappers;
 using Models;
+using Storage;
 using Storage.Implementations;
 using ViewModels;
 
@@ -14,6 +15,7 @@ namespace Services
             _movieStorage = new MovieStorage();
             _rentalStorage = new RentalStorage();
         }
+        public List<RentalViewModel> GetUserRentals() => GetRentals().Where(x => x.UserId == CurrentSession.CurrentUser.Id).ToList(); 
         public List<RentalViewModel> GetRentals() => _rentalStorage.GetAll().Select(x => x.ToModel()).ToList();
         public void Rent(int movieId, int userId)
         {
