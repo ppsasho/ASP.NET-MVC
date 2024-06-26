@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataAccess;
+using Microsoft.AspNetCore.Mvc;
 using Services.Implementation;
 using Services.Interface;
 using ViewModels;
@@ -8,10 +9,10 @@ namespace PizzaApp.Controllers
     public class PizzaController : Controller
     {
         private IPizzaService _pizzaService;
-        public PizzaController()
+        public PizzaController(IPizzaService dbContext)
         {
-            _pizzaService = new PizzaService();
-        }
+            _pizzaService = dbContext;
+        }.
         public IActionResult Index()
         {
             var items = _pizzaService.GetAll();

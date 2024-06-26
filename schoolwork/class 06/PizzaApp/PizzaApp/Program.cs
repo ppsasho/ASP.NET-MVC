@@ -1,3 +1,10 @@
+using DataAccess;
+using DataAccess.Implementation;
+using DataAccess.Interface;
+using Microsoft.EntityFrameworkCore;
+using Services.Implementation;
+using Services.Interface;
+
 namespace PizzaApp
 {
     public class Program
@@ -9,7 +16,16 @@ namespace PizzaApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<PizzaAppDbContext>(option => option.UseSqlServer(
+                builder.Configuration.GetConnectionString("DefaultConnectionString")
+                ));
+
+            builder.Services.AddTransient<IPizzaRepository, PizzaRepository>();
+            builder.Services.AddTransient<IPizzaService, PizzaService>();
+            builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

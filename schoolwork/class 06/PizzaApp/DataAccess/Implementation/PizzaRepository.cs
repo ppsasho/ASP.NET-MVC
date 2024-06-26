@@ -1,15 +1,20 @@
 ﻿using DataAccess.Interface;
-using DataAccess.Implementation;
 using DomainModels;
 
 namespace DataAccess.Implementation
 {
     public class PizzaRepository : Repository<Pizza>, IPizzaRepository
     {
+        public PizzaRepository(PizzaAppDbContext dbContext) : base(dbContext)
+        {
+            
+        }
         public List<Pizza> SearchByName(string name)
         {
-            var pizzas = ReadContent();
-            return pizzas.Where(x => x.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            
+            var items = _dbContext.Pizza.Where(x => x.Name.Contains(name))
+                                        .ToList();
+            return items;
         }
     }
 }

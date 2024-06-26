@@ -14,7 +14,7 @@ namespace ViewModels
         [Required]
         [MinLength(2)]
         [DisplayName("Last Name")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
         public string FullName => $"{FirstName} {LastName}";
         [Required]
         public int Age { get; set; }

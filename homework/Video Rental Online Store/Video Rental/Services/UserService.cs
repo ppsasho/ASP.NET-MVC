@@ -9,6 +9,10 @@ namespace Services
     public class UserService
     {
         private readonly UserStorage _userStorage;
+        public UserService() 
+        {
+            _userStorage = new UserStorage();
+        }
         public UserViewModel GetCurrentUser()
         {
             var user = CurrentSession.CurrentUser;
@@ -28,10 +32,6 @@ namespace Services
                 };
             }
         }
-        public UserService() 
-        {
-            _userStorage = new UserStorage();
-        }
         public List<UserViewModel> GetAll()
         {
             var users = _userStorage.GetAll();
@@ -39,7 +39,7 @@ namespace Services
         }
         public void NewRegister(UserViewModel model)
         {
-            var user = new User(model.FirstName, model.LastName, model.Password, model.Email, model.Age);
+            var user = new User(model.FirstName, model.LastName, model.Password, model.Email, model.Age, Models.Enums.SubscriptionType.None);
             _userStorage.Add(user);
         }
         public void Login(LogInViewModel model)
