@@ -12,7 +12,8 @@ namespace Mappers
                 Id = pizza.Id,
                 Name = pizza.Name,
                 Description = pizza.Description,
-                ImageUrl = pizza.ImageUrl
+                ImageUrl = pizza.ImageUrl,
+                PizzaType = pizza.PizzaType.ToString()
             };
             return model;
         }

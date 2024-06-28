@@ -1,4 +1,8 @@
 ﻿@model PizzaViewModel
+
+@{
+    var types = (List<SelectListItem>)ViewBag.Types;
+}
 <form asp-action="Create" method="post">
     <label asp-for="Name" class="form-label"></label>
     <input asp-for="Name" class="form-control" />
@@ -11,6 +15,9 @@
     <label asp-for="ImageUrl" class="form-label"></label>
     <input asp-for="ImageUrl" class="form-control" />
     <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    <select asp-for="PizzaTypeValue" asp-items="@types" class="form-control">
+        <option>Choose a type</option>
+    </select>
     <br>
     <button type="submit" class="btn btn-info">Submit</button>
 </form>

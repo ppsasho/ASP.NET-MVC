@@ -12,7 +12,7 @@ namespace PizzaApp.Controllers
         public PizzaController(IPizzaService dbContext)
         {
             _pizzaService = dbContext;
-        }.
+        }
         public IActionResult Index()
         {
             var items = _pizzaService.GetAll();
@@ -21,7 +21,7 @@ namespace PizzaApp.Controllers
         public IActionResult Details(int id)
         {
             var item = _pizzaService.GetDetails(id);
-            return View();
+            return View(item);
         }
         public IActionResult SearchByName(string name)
         {
@@ -29,6 +29,7 @@ namespace PizzaApp.Controllers
         }
         public IActionResult Create()
         {
+            ViewBag.Types = _pizzaService.GetTypeOptions();
             var pizza = new PizzaViewModel();
             return View(pizza);
         }
@@ -37,6 +38,7 @@ namespace PizzaApp.Controllers
         {
             if (!ModelState.IsValid) 
             {
+                ViewBag.Types = _pizzaService.GetTypeOptions();
                 return View(model);
             }
             _pizzaService.Create(model);

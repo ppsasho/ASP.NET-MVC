@@ -1,5 +1,6 @@
 ﻿using DataAccess.Interface;
 using DomainModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Implementation
 {
@@ -12,14 +13,14 @@ namespace DataAccess.Implementation
         }
         public T GetById(int id)
         {
-            var item = _dbContext.Set<T>().Where(x => x.Id == id).FirstOrDefault() ?? throw new Exception($"Entity with id {id} was not found!");
+            var item = _dbContext.Set<T>().AsNoTracking().Where(x => x.Id == id).FirstOrDefault() ?? throw new Exception($"Entity with id {id} was not found!");
 
             return item;
         }
 
         public List<T> GetAll()
         {
-            return _dbContext.Set<T>().ToList();
+            return _dbContext.Set<T>().AsNoTracking().ToList();
         }
         public void Add(T entity)
         {

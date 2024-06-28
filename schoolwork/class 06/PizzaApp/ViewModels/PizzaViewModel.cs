@@ -16,5 +16,8 @@ namespace ViewModels
         [Url]
         [DisplayName("Image link")]
         public string ImageUrl { get; set; }
+        public string PizzaType { get; set; }
+        [Required]
+        public int PizzaTypeValue { get; set; }
     }
 }

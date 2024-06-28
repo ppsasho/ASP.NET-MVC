@@ -2,6 +2,7 @@
 using DataAccess.Interface;
 using DomainModels;
 using Mappers;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Services.Interface;
 using ViewModels;
 
@@ -39,9 +40,24 @@ namespace Services.Implementation
             {
                 Name = pizza.Name,
                 Description = pizza.Description,
-                ImageUrl = pizza.ImageUrl
+                ImageUrl = pizza.ImageUrl,
+                PizzaType = (PizzaType)pizza.PizzaTypeValue
             };
             _pizzaRepository.Add(newPizza);
+        }
+        public List<SelectListItem> GetTypeOptions()
+        {
+            var type1 = new SelectListItem()
+            {
+                Value = ((int)PizzaType.Standard).ToString(),
+                Text = PizzaType.Standard.ToString()
+            };
+            var type2 = new SelectListItem()
+            {
+                Value = ((int)PizzaType.Premium).ToString(),
+                Text = PizzaType.Premium.ToString()
+            };
+            return new List<SelectListItem>() { type1, type2 };
         }
 
         public void Delete(int id)
