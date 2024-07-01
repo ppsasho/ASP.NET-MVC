@@ -1,8 +1,12 @@
-﻿using Models;
+﻿//using Models;
 
-namespace Storage.Implementations
-{
-    public class UserStorage : StorageJSON<User>
-    {
-    }
-}
+//namespace Storage.Implementations
+//{
+//    public class UserStorage : Storage<User>
+//    {
+//        public UserStorage(VideoRentalDbContext dbContext) : base(dbContext)
+//        {
+            
+//        }
+//    }
+//}

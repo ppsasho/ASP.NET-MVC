@@ -1,19 +1,20 @@
 ﻿using Mappers;
 using Models;
+using Services.Interfaces;
 using Storage;
-using Storage.Implementations;
+using Storage.Interfaces;
 using ViewModels;
 
 namespace Services
 {
-    public class MovieService
+    public class MovieService : IMovieService
     {
-        private readonly MovieStorage _movieStorage;
-        private readonly RentalStorage _rentalStorage;
-        public MovieService()
+        private IStorage<Movie> _movieStorage;
+        private IStorage<Rental> _rentalStorage;
+        public MovieService(IStorage<Movie> movieStorage, IStorage<Rental> rentalStorage)
         {
-            _movieStorage = new MovieStorage();
-            _rentalStorage = new RentalStorage();
+            _movieStorage = movieStorage;
+            _rentalStorage = rentalStorage;
         }
         public List<RentalViewModel> GetUserRentals() => GetRentals().Where(x => x.UserId == CurrentSession.CurrentUser.Id).ToList(); 
         public List<RentalViewModel> GetRentals() => _rentalStorage.GetAll().Select(x => x.ToModel()).ToList();

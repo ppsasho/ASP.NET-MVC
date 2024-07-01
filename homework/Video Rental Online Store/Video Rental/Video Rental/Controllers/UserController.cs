@@ -2,6 +2,7 @@
 using Models;
 using Models.Enums;
 using Services;
+using Services.Interfaces;
 using Storage;
 using ViewModels;
 
@@ -9,12 +10,12 @@ namespace Video_Rental.Controllers
 {
     public class UserController : Controller
     {
-        private readonly UserService _userService;
-        private readonly MovieService _movieService;
-        public UserController()
+        private IUserService _userService;
+        private IMovieService _movieService;
+        public UserController(IUserService userService, IMovieService movieService)
         {
-            _userService = new UserService();
-            _movieService = new MovieService();
+            _userService = userService;
+            _movieService = movieService;
         }
         public IActionResult Index()
         {
