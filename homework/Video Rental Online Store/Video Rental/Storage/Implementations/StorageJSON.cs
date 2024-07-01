@@ -4,7 +4,7 @@ using Storage.Interfaces;
 
 namespace Storage.Implementations
 {
-    public class Storage<T> : IStorage<T> where T : Base
+    public class StorageJSON<T> : IStorage<T> where T : Base
     {
         public void Add(T item)
         {

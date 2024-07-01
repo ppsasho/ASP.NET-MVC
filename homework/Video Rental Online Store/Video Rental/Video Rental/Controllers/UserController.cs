@@ -115,6 +115,54 @@ namespace Video_Rental.Controllers
         }
         public IActionResult Subscribe()
         {
+            var user = _userService.GetCurrentUser();
+            return View(user);
+        }
+        public IActionResult ChangeSubscription(string subType)
+        {
+            var userRentals = _movieService.GetUserRentals().Where(x => x.ReturnedOn == null).ToList();
+            switch (subType)
+            {
+                case "Monthly":
+                    if(userRentals.Count > 4)
+                    {
+                        return RedirectToAction("ReturnMovies");
+                    }
+                    else
+                    {
+                        CurrentSession.CurrentUser.SubscriptionType = SubscriptionType.Monthly;
+                        ViewBag.SubscriptionType = "Monthly";
+                        _userService.UpdateUser();
+                    }
+                    break;
+
+                case "Yearly":
+                    CurrentSession.CurrentUser.SubscriptionType = SubscriptionType.Yearly;
+                    ViewBag.SubscriptionType = "Yearly";
+                    _userService.UpdateUser();
+                    break;
+
+                case "Unsubscribe":
+                    if (userRentals.Count > 1)
+                    {
+                        return RedirectToAction("ReturnMovies");
+                    }
+                    else
+                    {
+                        CurrentSession.CurrentUser.RemoveSubscription();
+                        ViewBag.SubscriptionType = "None";
+                        _userService.UpdateUser();
+                    }
+                    break;
+            }
+            return RedirectToAction("SubscriptionChangeSuccess");
+        }
+        public IActionResult ReturnMovies()
+        {
+            return View();
+        }
+        public IActionResult SubscriptionChangeSuccess()
+        {
             return View();
         }
         public IActionResult MovieRentLimitReached()

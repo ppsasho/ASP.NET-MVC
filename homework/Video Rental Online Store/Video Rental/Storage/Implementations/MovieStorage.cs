@@ -1,8 +1,9 @@
 ﻿using Models;
+using Storage.Interfaces;
 
 namespace Storage.Implementations
 {
-    public class MovieStorage : Storage<Movie>
+    public class MovieStorage : StorageJSON<Movie>
     {
     }
 }

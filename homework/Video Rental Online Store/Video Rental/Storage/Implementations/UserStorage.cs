@@ -2,7 +2,7 @@
 
 namespace Storage.Implementations
 {
-    public class UserStorage : Storage<User>
+    public class UserStorage : StorageJSON<User>
     {
     }
 }

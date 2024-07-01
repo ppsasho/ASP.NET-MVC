@@ -2,7 +2,7 @@
 
 namespace Storage.Implementations
 {
-    public class RentalStorage : Storage<Rental>
+    public class RentalStorage : StorageJSON<Rental>
     {
 
     }

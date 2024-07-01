@@ -32,6 +32,10 @@ namespace Services
                 };
             }
         }
+        public void UpdateUser()
+        {
+            _userStorage.Update(CurrentSession.CurrentUser);
+        }
         public List<UserViewModel> GetAll()
         {
             var users = _userStorage.GetAll();
