@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting.Internal;
 using Storage;
+using Services;
 using Storage.Interfaces;
 using Storage.Implementations;
 
@@ -18,10 +19,11 @@ namespace Video_Rental
                 builder.Configuration.GetConnectionString("DefaultConnectionString")
                 ));
             
-
-            builder.Services.AddTransient<Storage.Interfaces.IStorage, Storage.Implementations.Storage>();
-            builder.Services.AddTransient<Services.Interfaces.IUserService, Services.UserService>();
-            builder.Services.AddTransient<Services.Interfaces.IMovieService, Services.MovieService>();
+            builder.Services.AddTransient<IMovieStorage,  MovieStorage>();
+            builder.Services.AddTransient<IRentalStorage,  RentalStorage>();
+            builder.Services.AddTransient<IUserStorage, UserStorage>();
+            builder.Services.AddTransient<Services.Interfaces.IUserService, UserService>();
+            builder.Services.AddTransient<Services.Interfaces.IMovieService, MovieService>();
             builder.Services.AddTransient(typeof(IStorage<>), typeof(Storage<>));
 
             var app = builder.Build();

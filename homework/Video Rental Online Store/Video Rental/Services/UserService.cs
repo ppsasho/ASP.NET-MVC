@@ -10,8 +10,8 @@ namespace Services
 {
     public class UserService : IUserService
     {
-        private IStorage<User> _userStorage;
-        public UserService(IStorage<User> storage) 
+        private readonly IUserStorage _userStorage;
+        public UserService(IUserStorage storage) 
         {
             _userStorage = storage;
         }

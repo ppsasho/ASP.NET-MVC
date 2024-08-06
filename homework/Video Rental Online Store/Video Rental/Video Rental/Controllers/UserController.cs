@@ -10,8 +10,8 @@ namespace Video_Rental.Controllers
 {
     public class UserController : Controller
     {
-        private IUserService _userService;
-        private IMovieService _movieService;
+        private readonly IUserService _userService;
+        private readonly IMovieService _movieService;
         public UserController(IUserService userService, IMovieService movieService)
         {
             _userService = userService;
@@ -67,8 +67,13 @@ namespace Video_Rental.Controllers
         }
         public IActionResult ViewMovies()
         {
+            if (!_movieService.GetAll().Any())
+            {
+                _movieService.AddDummyMovies();
+            }
             var userMovieModel = new UserMovieViewModel()
             {
+                
                 Movies = _movieService.GetAll(),
                 User = _userService.GetCurrentUser()
             };

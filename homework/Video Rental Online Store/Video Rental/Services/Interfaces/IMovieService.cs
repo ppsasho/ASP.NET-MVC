@@ -11,5 +11,6 @@ namespace Services.Interfaces
         public void Rent(int movieId, int userId);
         public List<RentalViewModel> GetRentals();
         public List<RentalViewModel> GetUserRentals();
+        public void AddDummyMovies();
     }
 }
