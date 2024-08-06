@@ -1,21 +1,40 @@
-﻿<h5>You were redirected to this page because you have reached your current rental limit, <br></br>Please check out the subscriptions below in case you want to rent more movies at the same time.</h3>
+﻿@model UserViewModel
+
+@{
+    if (Model.FirstName == null)
+    {
+        <h3>You are not logged in! The subscribe feature is available only when you're logged in.</h3>
+    }
+    else
+    {
+        <h3>
+    Please check out the subscriptions below in case you want to rent more movies at the same time.</h3>
     <br />
     <div style="justify-content:center">
-    <div class="card" style="width: 18rem;display:inline-block">
-      <div class="card-body">
-        <h5 class="card-title">Monthly</h5>
+        <div class="card" style="width: 18rem;display:inline-block">
+            <div class="card-body">
+                <h5 class="card-title">Monthly</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">Subscription type</h6>
-        <p class="card-text"></p>
-        <a href="#" class="card-link btn btn-primary">Subscribe</a>
-      </div>
-    </div>
+                <p class="card-text">Having a monthly subscription, you're allowed to rent up to 4 movies at a time!</p>
+                <a asp-action="ChangeSubscription" asp-controller="User" asp-route-subType="Monthly" class="btn btn-primary">Subscribe</a>
+            </div>
+        </div>
         <div class="card" style="width: 18rem; display:inline-block">
-        <div class="card-body">
-            <h5 class="card-title">Yearly</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">Subscription type</h6>
-            <p class="card-text"></p>
-                <a href="#" class="card-link btn btn-primary">Subscribe</a>
+            <div class="card-body">
+                <h5 class="card-title">Yearly</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Subscription type</h6>
+                <p class="card-text">Having a yearly subscription, you're allowed to rent up to 10 movies at a time!</p>
+                <a asp-action="ChangeSubscription" asp-controller="User" asp-route-subType="Yearly" class="btn btn-primary">Subscribe</a>
+            </div>
         </div>
     </div>
-
-</div>
+    <div class="card" style="width: 18rem; display:inline-block">
+        <div class="card-body">
+            <h5 class="card-title">No subscription</h5>
+            <p class="card-text">Having no subscription, you're only allowed to rent 1 movie at a time!</p>
+            <a asp-action="ChangeSubscription" asp-controller="User" asp-route-subType="Unsubscribe" class="btn btn-primary">Subscribe</a>
+        </div>
+       <div/>
+      </div>
+    }
+}

@@ -2,6 +2,7 @@
 using Models;
 using Models.Enums;
 using Services;
+using Services.Interfaces;
 using Storage;
 using ViewModels;
 
@@ -9,12 +10,12 @@ namespace Video_Rental.Controllers
 {
     public class UserController : Controller
     {
-        private readonly UserService _userService;
-        private readonly MovieService _movieService;
-        public UserController()
+        private readonly IUserService _userService;
+        private readonly IMovieService _movieService;
+        public UserController(IUserService userService, IMovieService movieService)
         {
-            _userService = new UserService();
-            _movieService = new MovieService();
+            _userService = userService;
+            _movieService = movieService;
         }
         public IActionResult Index()
         {
@@ -66,8 +67,13 @@ namespace Video_Rental.Controllers
         }
         public IActionResult ViewMovies()
         {
+            if (!_movieService.GetAll().Any())
+            {
+                _movieService.AddDummyMovies();
+            }
             var userMovieModel = new UserMovieViewModel()
             {
+                
                 Movies = _movieService.GetAll(),
                 User = _userService.GetCurrentUser()
             };
@@ -114,6 +120,54 @@ namespace Video_Rental.Controllers
             return RedirectToAction("ViewMovies");
         }
         public IActionResult Subscribe()
+        {
+            var user = _userService.GetCurrentUser();
+            return View(user);
+        }
+        public IActionResult ChangeSubscription(string subType)
+        {
+            var userRentals = _movieService.GetUserRentals().Where(x => x.ReturnedOn == null).ToList();
+            switch (subType)
+            {
+                case "Monthly":
+                    if(userRentals.Count > 4)
+                    {
+                        return RedirectToAction("ReturnMovies");
+                    }
+                    else
+                    {
+                        CurrentSession.CurrentUser.SubscriptionType = SubscriptionType.Monthly;
+                        ViewBag.SubscriptionType = "Monthly";
+                        _userService.UpdateUser();
+                    }
+                    break;
+
+                case "Yearly":
+                    CurrentSession.CurrentUser.SubscriptionType = SubscriptionType.Yearly;
+                    ViewBag.SubscriptionType = "Yearly";
+                    _userService.UpdateUser();
+                    break;
+
+                case "Unsubscribe":
+                    if (userRentals.Count > 1)
+                    {
+                        return RedirectToAction("ReturnMovies");
+                    }
+                    else
+                    {
+                        CurrentSession.CurrentUser.RemoveSubscription();
+                        ViewBag.SubscriptionType = "None";
+                        _userService.UpdateUser();
+                    }
+                    break;
+            }
+            return RedirectToAction("SubscriptionChangeSuccess");
+        }
+        public IActionResult ReturnMovies()
+        {
+            return View();
+        }
+        public IActionResult SubscriptionChangeSuccess()
         {
             return View();
         }

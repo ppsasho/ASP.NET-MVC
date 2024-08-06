@@ -1,0 +1,14 @@
+﻿@{
+    var type = (string)ViewBag.SubscriptionType;
+    if (type == "None")
+    {
+        <h3>You have successfully unsubscribed!</h3>
+    }
+    else
+    {
+        <h3>
+            You have successfully subscribed!.
+        </h3>
+    }
+}
+<a asp-action="ViewMovies" asp-controller="User" class="btn btn-primary">Go back to movies</a>

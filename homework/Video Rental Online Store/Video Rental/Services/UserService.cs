@@ -1,17 +1,19 @@
 ﻿using Mappers;
 using Models;
+using Services.Interfaces;
 using Storage;
 using Storage.Implementations;
+using Storage.Interfaces;
 using ViewModels;
 
 namespace Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        private readonly UserStorage _userStorage;
-        public UserService() 
+        private readonly IUserStorage _userStorage;
+        public UserService(IUserStorage storage) 
         {
-            _userStorage = new UserStorage();
+            _userStorage = storage;
         }
         public UserViewModel GetCurrentUser()
         {
@@ -31,6 +33,10 @@ namespace Services
                     LastName = null,
                 };
             }
+        }
+        public void UpdateUser()
+        {
+            _userStorage.Update(CurrentSession.CurrentUser);
         }
         public List<UserViewModel> GetAll()
         {
