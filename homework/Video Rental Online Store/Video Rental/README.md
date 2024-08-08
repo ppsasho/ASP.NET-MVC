@@ -115,3 +115,17 @@ if (you want to use enums)
 - **Rent Movie**: If a movie is available (i.e., the quantity is more than 0), show a "Rent" button on the movie's detail page. When this button is clicked, create a new `Rental` object, link it to the current user and the movie. Don't forget to decrease the quantity of the movie.
 
  - **Return Movie**: Create a page that shows all the movies currently rented by the user. Each item should have a "Return" button. When this button is clicked, find the corresponding `Rental` object in the `Rentals` list using the `Rental.Id`, `Rental.UserId`, and `Rental.MovieId`. Set the `ReturnedOn` property of the `Rental` object to the current date and time. Also, find the corresponding `Movie` object using `Rental.MovieId` and increase the `Quantity` of the `Movie` object by 1, indicating that the movie has been returned and is now available for rent again.
+
+### Using application
+
+**Instructions to Run the Application:**
+
+    *Prerequisites:*
+        Visual Studio: Ensure you have Visual Studio installed.
+        .NET Core 6.0: Your Visual Studio installation must include at least .NET Core 6.0.
+        SQL Server Management Studio (SSMS): Make sure SSMS is installed and properly configured.
+
+    Setting Up the Project:
+        Open the solution in Visual Studio.
+        In the Package Manager Console, select Storage as the default project.
+        Run the following command to update the database and establish the connection with SSMS:  Update-Database
