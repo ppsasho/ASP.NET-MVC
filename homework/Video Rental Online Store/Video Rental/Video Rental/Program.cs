@@ -1,9 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting.Internal;
-using Storage;
-using Services;
-using Storage.Interfaces;
-using Storage.Implementations;
+using Services.Helpers;
 
 namespace Video_Rental
 {
@@ -15,16 +11,7 @@ namespace Video_Rental
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<VideoRentalDbContext>(option => option.UseSqlServer(
-                builder.Configuration.GetConnectionString("DefaultConnectionString")
-                ));
-            
-            builder.Services.AddTransient<IMovieStorage,  MovieStorage>();
-            builder.Services.AddTransient<IRentalStorage,  RentalStorage>();
-            builder.Services.AddTransient<IUserStorage, UserStorage>();
-            builder.Services.AddTransient<Services.Interfaces.IUserService, UserService>();
-            builder.Services.AddTransient<Services.Interfaces.IMovieService, MovieService>();
-            builder.Services.AddTransient(typeof(IStorage<>), typeof(Storage<>));
+            builder.Services.RegisterDependencies(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 
             var app = builder.Build();
 
