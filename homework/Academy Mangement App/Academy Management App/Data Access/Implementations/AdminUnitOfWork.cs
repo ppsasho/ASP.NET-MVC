@@ -3,7 +3,7 @@ using Domain_Models;
 
 namespace Data_Access.Implementations
 {
-    public class AdminUnitOfWork : IDisposable , IAdminUnitOfWork
+    public class AdminUnitOfWork : IDisposable
     {
         private readonly AcademyManagementDbContext  _context;
 
