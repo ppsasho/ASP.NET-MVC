@@ -3,14 +3,15 @@ using Domain_Models;
 
 namespace Data_Access.Implementations
 {
-    public class AdminUnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable
     {
         private readonly AcademyManagementDbContext  _context;
 
         private Repository<Student>? _studentRepository;
         private Repository<Subject>? _subjectRepository;
+        private Repository<Grade>? _gradeRepository;
         private Repository<User>? _userRepository;
-        public AdminUnitOfWork(AcademyManagementDbContext context)
+        public UnitOfWork(AcademyManagementDbContext context)
         {
             _context = context;
         }
@@ -24,6 +25,18 @@ namespace Data_Access.Implementations
                 }
                 _studentRepository = new Repository<Student>(_context);
                 return _studentRepository;
+            }
+        }
+        public Repository<Grade> GradeRepository
+        {
+            get
+            {
+                if (_gradeRepository != null)
+                {
+                    return _gradeRepository;
+                }
+                _gradeRepository = new Repository<Grade>(_context);
+                return _gradeRepository;
             }
         }
         public Repository<Subject> SubjectRepository
