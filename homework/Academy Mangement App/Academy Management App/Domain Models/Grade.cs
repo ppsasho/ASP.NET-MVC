@@ -2,8 +2,10 @@
 {
     public class Grade : BaseEntity
     {
-        public Student Student { get; set; }
-        public Subject Subject { get; set; }
+        public int StudentId { get; set; }
+        public int SubjectId { get; set; }
         public int GradeAmount { get; set; }
+        public virtual Student Student { get; set; }
+        public virtual Subject Subject { get; set; }
     }
 }
