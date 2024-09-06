@@ -1,9 +1,10 @@
 ﻿using Domain_Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data_Access
 {
-    public class AcademyManagementDbContext : DbContext
+    public class AcademyManagementDbContext : IdentityDbContext
     {
         public AcademyManagementDbContext(DbContextOptions options) : base(options)
         {

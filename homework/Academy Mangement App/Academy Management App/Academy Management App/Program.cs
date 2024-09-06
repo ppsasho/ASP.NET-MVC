@@ -1,13 +1,27 @@
-namespace Academy_Management_App
-{
+namespace Academy_Management_App;
+
+using Data_Access;
+using Domain_Models;
+using Domain_Models.Enums;
+using Microsoft.AspNetCore.Identity;
+using static Services.DIModule.DIModule;
+
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+        // Add services to the container.
+
+        builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+        builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+            .AddRoles<Role>()
+            .AddEntityFrameworkStores<AcademyManagementDbContext>();
+
+        builder.Services.AddControllersWithViews();
+            builder.Services.RegisterDependencies(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 
             var app = builder.Build();
 
@@ -33,4 +47,3 @@ namespace Academy_Management_App
             app.Run();
         }
     }
-}
