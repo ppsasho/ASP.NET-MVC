@@ -7,61 +7,22 @@ namespace Data_Access.Implementations
     {
         private readonly AcademyManagementDbContext  _context;
 
-        private Repository<Student>? _studentRepository;
-        private Repository<Subject>? _subjectRepository;
-        private Repository<Grade>? _gradeRepository;
-        private Repository<User>? _userRepository;
-        public UnitOfWork(AcademyManagementDbContext context)
+        private IStudentRepository _studentRepository;
+        private ISubjectRepository? _subjectRepository;
+        private IGradeRepository? _gradeRepository;
+        private IUserRepository? _userRepository;
+        public UnitOfWork(
+            AcademyManagementDbContext context,
+            ISubjectRepository subjectRepository,
+            IStudentRepository studentRepo,
+            IGradeRepository gradeRepository,
+            IUserRepository userRepository)
         {
             _context = context;
-        }
-        public Repository<Student> StudentRepository
-        {
-            get
-            {
-                if (_studentRepository != null)
-                {
-                    return _studentRepository;
-                }
-                _studentRepository = new Repository<Student>(_context);
-                return _studentRepository;
-            }
-        }
-        public Repository<Grade> GradeRepository
-        {
-            get
-            {
-                if (_gradeRepository != null)
-                {
-                    return _gradeRepository;
-                }
-                _gradeRepository = new Repository<Grade>(_context);
-                return _gradeRepository;
-            }
-        }
-        public Repository<Subject> SubjectRepository
-        {
-            get
-            {
-                if (_subjectRepository != null)
-                {
-                    return _subjectRepository;
-                }
-                _subjectRepository = new Repository<Subject>(_context);
-                return _subjectRepository;
-            }
-        }
-        public Repository<User> UserRepository
-        {
-            get
-            {
-                if (_userRepository != null)
-                {
-                    return _userRepository;
-                }
-                _userRepository = new Repository<User>(_context);
-                return _userRepository;
-            }
+            _studentRepository = studentRepo;
+            _subjectRepository = subjectRepository;
+            _gradeRepository = gradeRepository;
+            _userRepository = userRepository;
         }
         public void Save()
         {
