@@ -7,10 +7,10 @@ namespace Data_Access.Implementations
     {
         private readonly AcademyManagementDbContext  _context;
 
-        private IStudentRepository _studentRepository;
-        private ISubjectRepository? _subjectRepository;
-        private IGradeRepository? _gradeRepository;
-        private IUserRepository? _userRepository;
+        public IStudentRepository StudentRepository;
+        public ISubjectRepository SubjectRepository;
+        public IGradeRepository GradeRepository;
+        public IUserRepository UserRepository;
         public UnitOfWork(
             AcademyManagementDbContext context,
             ISubjectRepository subjectRepository,
@@ -19,10 +19,10 @@ namespace Data_Access.Implementations
             IUserRepository userRepository)
         {
             _context = context;
-            _studentRepository = studentRepo;
-            _subjectRepository = subjectRepository;
-            _gradeRepository = gradeRepository;
-            _userRepository = userRepository;
+            StudentRepository = studentRepo;
+            SubjectRepository = subjectRepository;
+            GradeRepository = gradeRepository;
+            UserRepository = userRepository;
         }
         public void Save()
         {
