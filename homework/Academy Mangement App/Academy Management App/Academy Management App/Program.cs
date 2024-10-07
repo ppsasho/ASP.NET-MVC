@@ -16,10 +16,6 @@ using static Services.DIModule.DIModule;
 
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
-            .AddRoles<Role>()
-            .AddEntityFrameworkStores<AcademyManagementDbContext>();
-
         builder.Services.AddControllersWithViews();
             builder.Services.RegisterDependencies(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 

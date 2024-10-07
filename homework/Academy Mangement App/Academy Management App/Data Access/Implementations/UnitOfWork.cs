@@ -3,14 +3,14 @@ using Domain_Models;
 
 namespace Data_Access.Implementations
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly AcademyManagementDbContext  _context;
 
-        public IStudentRepository StudentRepository;
-        public ISubjectRepository SubjectRepository;
-        public IGradeRepository GradeRepository;
-        public IUserRepository UserRepository;
+        public IStudentRepository StudentRepository { get; }
+        public ISubjectRepository SubjectRepository { get; }
+        public IGradeRepository GradeRepository { get; }
+        public IUserRepository UserRepository { get; }
         public UnitOfWork(
             AcademyManagementDbContext context,
             ISubjectRepository subjectRepository,

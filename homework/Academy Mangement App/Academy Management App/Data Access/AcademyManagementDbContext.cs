@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data_Access
 {
-    public class AcademyManagementDbContext : IdentityDbContext
+    public class AcademyManagementDbContext : DbContext
     {
         public AcademyManagementDbContext(DbContextOptions options) : base(options)
         {
@@ -14,5 +14,8 @@ namespace Data_Access
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Grade> Grades { get; set; }
 
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //}
     }
 }

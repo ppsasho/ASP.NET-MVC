@@ -8,6 +8,10 @@ namespace Domain_Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public DateTime CreatedOn = DateTime.UtcNow.Date;
+        public DateTime CreatedOn { get; set; }
+        public BaseEntity()
+        {
+            CreatedOn = DateTime.UtcNow.Date;
+        }
     }
 }

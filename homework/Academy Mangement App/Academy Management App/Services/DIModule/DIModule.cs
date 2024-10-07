@@ -20,6 +20,8 @@ namespace Services.DIModule
             services.AddTransient<ISubjectRepository, SubjectRepository>();
             services.AddTransient<IGradeRepository, GradeRepository>();
 
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             return services;
         }
     }
